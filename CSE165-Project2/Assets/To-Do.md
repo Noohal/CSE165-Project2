@@ -1,7 +1,7 @@
 # To Do
 
-- [ ] Import Macchu Picchu model
-- [ ] Set proper scale for model
+- [x] Import Macchu Picchu model
+- [x] (MIGHT NEED TO ADJUST) Set proper scale for model
   - Model Unit Size: 1 inch
   - Unity Unit Size: 1 meter
 - [ ] Add mesh collider to model
