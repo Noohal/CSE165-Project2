@@ -4,7 +4,7 @@
 - [x] (MIGHT NEED TO ADJUST) Set proper scale for model
   - Model Unit Size: 1 inch
   - Unity Unit Size: 1 meter
-- [ ] Add mesh collider to model
+- [x] Add mesh collider to model
 - [ ] Be able to parse coordinates from text file
 - [ ] Make checkpoints based on coordinates
 - [ ] Hand tracking to move the drone
