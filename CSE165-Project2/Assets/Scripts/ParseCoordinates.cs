@@ -6,6 +6,16 @@ public class ParseCoordinates : MonoBehaviour
 {
     public TextAsset file;
 
+    private void Start()
+    {
+        
+    }
+
+    private void Update()
+    {
+        
+    }
+
     List<Vector3> ParseFile()
     {
         float ScaleFactor = 1.0f / 39.37f;

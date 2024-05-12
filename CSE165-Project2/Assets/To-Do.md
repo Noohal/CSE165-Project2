@@ -5,7 +5,7 @@
   - Model Unit Size: 1 inch
   - Unity Unit Size: 1 meter
 - [x] Add mesh collider to model
-- [ ] Be able to parse coordinates from text file
+- [x] Be able to parse coordinates from text file
 - [ ] Make checkpoints based on coordinates
 - [ ] Hand tracking to move the drone
   - Pose like Superman to move forward?
