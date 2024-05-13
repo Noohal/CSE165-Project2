@@ -2,21 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ParseCoordinates : MonoBehaviour
+public class ParseCoordinates
 {
-    public TextAsset file;
 
-    private void Start()
-    {
-        
-    }
-
-    private void Update()
-    {
-        
-    }
-
-    List<Vector3> ParseFile()
+    public static List<Vector3> ParseFile(TextAsset file)
     {
         float ScaleFactor = 1.0f / 39.37f;
         List<Vector3> positions = new List<Vector3>();

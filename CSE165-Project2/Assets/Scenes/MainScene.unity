@@ -141,7 +141,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d38a3d7e0e53eb44aa221cbb984c88b5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 225
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d38a3d7e0e53eb44aa221cbb984c88b5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -255,10 +255,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 312922559}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ba0fd43ff99f1d4b8510531738f810f, type: 3}
+  m_Script: {fileID: 11500000, guid: c9fb297e4aab99c4fb7bb8a4fb365f52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  file: {fileID: 0}
+  coordinateFile: {fileID: 4900000, guid: 276de8f981c435e428286dd6b4400732, type: 3}
+  coordinates: []
+  checkpointPrefab: {fileID: 5430500350894000956, guid: b3c9f3a44c34a624e9700030b7cb4cae, type: 3}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,7 +6,7 @@
   - Unity Unit Size: 1 meter
 - [x] Add mesh collider to model
 - [x] Be able to parse coordinates from text file
-- [ ] Make checkpoints based on coordinates
+- [x] Make checkpoints based on coordinates
 - [ ] Hand tracking to move the drone
   - Pose like Superman to move forward?
   - Move arms away from center to turn left or right.
