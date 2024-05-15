@@ -300,7 +300,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 114392993255165844, guid: 835e735ca71bf78459fb2cababd74112, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114428879332287356, guid: 835e735ca71bf78459fb2cababd74112, type: 3}
       propertyPath: HandType
@@ -325,6 +325,7 @@ GameObject:
   m_Component:
   - component: {fileID: 312922560}
   - component: {fileID: 312922561}
+  - component: {fileID: 312922562}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -362,6 +363,80 @@ MonoBehaviour:
   coordinateFile: {fileID: 4900000, guid: 276de8f981c435e428286dd6b4400732, type: 3}
   coordinates: []
   checkpointPrefab: {fileID: 5430500350894000956, guid: b3c9f3a44c34a624e9700030b7cb4cae, type: 3}
+--- !u!114 &312922562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 312922559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b64c733343cce44bbb874b816c9db7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  threshold: 0.1
+  skeleton: {fileID: 1763973367}
+  gestures:
+  - name: Fist
+    fingerData:
+    - {x: 0, y: 0, z: 0}
+    - {x: 0, y: 0, z: 0}
+    - {x: -0.020068994, y: -0.011553998, z: -0.010497002}
+    - {x: -0.035293765, y: -0.017737808, z: -0.02914133}
+    - {x: -0.05534505, y: -0.03540872, z: -0.047655463}
+    - {x: -0.08089855, y: -0.05367076, z: -0.035186015}
+    - {x: -0.0959962, y: -0.0073164483, z: -0.023550674}
+    - {x: -0.10309712, y: -0.044377733, z: -0.019740729}
+    - {x: -0.07893474, y: -0.04362181, z: -0.022245238}
+    - {x: -0.09564659, y: -0.002543155, z: -0.0017259275}
+    - {x: -0.09687357, y: -0.0454526, z: -0.0017116712}
+    - {x: -0.069877565, y: -0.046606828, z: -0.0070840595}
+    - {x: -0.08869378, y: -0.0065293177, z: 0.017465223}
+    - {x: -0.088119216, y: -0.045350153, z: 0.013817588}
+    - {x: -0.062479705, y: -0.046057966, z: 0.006870843}
+    - {x: -0.03407354, y: -0.009419832, z: 0.02299857}
+    - {x: -0.07789583, y: -0.01369119, z: 0.035054047}
+    - {x: -0.07879986, y: -0.04318129, z: 0.026494922}
+    - {x: -0.05940285, y: -0.044462893, z: 0.020607233}
+    - {x: -0.08664684, y: -0.056932267, z: -0.011468316}
+    - {x: -0.070983596, y: -0.022833427, z: -0.024670653}
+    - {x: -0.059754975, y: -0.024385666, z: -0.012412011}
+    - {x: -0.05309487, y: -0.023736611, z: 0.0040255683}
+    - {x: -0.049274966, y: -0.025046144, z: 0.01901229}
+    onRecognized:
+      m_PersistentCalls:
+        m_Calls: []
+  - name: Rock On
+    fingerData:
+    - {x: 0, y: 0, z: 0}
+    - {x: 0, y: 0, z: 0}
+    - {x: -0.020068986, y: -0.011553987, z: -0.010496986}
+    - {x: -0.037814, y: -0.023419999, z: -0.023223188}
+    - {x: -0.057479963, y: -0.04827317, z: -0.030479753}
+    - {x: -0.080045246, y: -0.06498492, z: -0.0116782375}
+    - {x: -0.09599623, y: -0.0073164846, z: -0.02355069}
+    - {x: -0.13099359, y: -0.021602765, z: -0.026643023}
+    - {x: -0.15339349, y: -0.030890865, z: -0.028268525}
+    - {x: -0.09564659, y: -0.0025431535, z: -0.0017259128}
+    - {x: -0.10751664, y: -0.04377577, z: -0.00042208395}
+    - {x: -0.080316536, y: -0.044101752, z: -0.004784234}
+    - {x: -0.08869379, y: -0.0065293224, z: 0.017465223}
+    - {x: -0.096940674, y: -0.044615746, z: 0.016012825}
+    - {x: -0.0723946, y: -0.049926396, z: 0.0073276097}
+    - {x: -0.034073565, y: -0.009419852, z: 0.022998555}
+    - {x: -0.07789585, y: -0.013691182, z: 0.03505403}
+    - {x: -0.10473419, y: -0.024678644, z: 0.04518916}
+    - {x: -0.12178267, y: -0.031859297, z: 0.053575937}
+    - {x: -0.08875341, y: -0.067721464, z: 0.011188508}
+    - {x: -0.1753306, y: -0.035364456, z: -0.028365608}
+    - {x: -0.06898676, y: -0.022324465, z: -0.009476663}
+    - {x: -0.055422816, y: -0.033482138, z: 0.0013310954}
+    - {x: -0.1415731, y: -0.03754097, z: 0.061203822}
+    onRecognized:
+      m_PersistentCalls:
+        m_Calls: []
+  debugMode: 1
 --- !u!1 &315464743
 GameObject:
   m_ObjectHideFlags: 0
@@ -711,7 +786,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 114392993255165844, guid: 835e735ca71bf78459fb2cababd74112, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114428879332287356, guid: 835e735ca71bf78459fb2cababd74112, type: 3}
       propertyPath: HandType
@@ -779,6 +854,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 962894888}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1763973367 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114567484643301796, guid: 835e735ca71bf78459fb2cababd74112, type: 3}
+  m_PrefabInstance: {fileID: 1381494025}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2609c54f376cffc4da1ab9401cc1a36f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1844628175
 PrefabInstance:
   m_ObjectHideFlags: 0

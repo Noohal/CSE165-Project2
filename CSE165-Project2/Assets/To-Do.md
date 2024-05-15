@@ -7,7 +7,8 @@
 - [x] Add mesh collider to model
 - [x] Be able to parse coordinates from text file
 - [x] Make checkpoints based on coordinates
-- [ ] Hand tracking to move the drone
+- [x] Hand tracking
+- [ ] Use tracking to move the drone
   - Pose like Superman to move forward?
   - Move arms away from center to turn left or right.
 - [ ] Visual indicator to point where next checkpoint is
