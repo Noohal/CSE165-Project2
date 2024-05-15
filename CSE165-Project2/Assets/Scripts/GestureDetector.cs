@@ -25,7 +25,7 @@ public class GestureDetector : MonoBehaviour
     public OVRSkeleton rightHandSkeleton;
     public List<Gesture> gestures;
 
-    public DroneMovement movement;
+    public LineRenderer lineRenderer;
 
     private Gesture currentGesture;
     private Gesture prevGesture;
@@ -44,6 +44,12 @@ public class GestureDetector : MonoBehaviour
         StartCoroutine(InitializeBones());
         prevGesture = new Gesture();
         currentGesture = new Gesture();
+
+        lineRenderer = gameObject.AddComponent<LineRenderer>();
+        lineRenderer.startWidth = 0.5f;
+        lineRenderer.endWidth = 0.01f;
+        lineRenderer.positionCount = 2;
+        lineRenderer.material = new Material(Shader.Find("Sprites/Default")) { color = Color.red }; // Set line color to red
     }
 
     // Update is called once per frame
@@ -203,12 +209,17 @@ public class GestureDetector : MonoBehaviour
             MoveDrone();
         }
     }
+
     // --- Gesture Actions
-
-
     public void MoveDrone()
     {
-        Vector3 movement = new Vector3(1.0f, 0.0f, 0.0f);
+        Vector3 indexTipPosition = leftBones[(int)OVRSkeleton.BoneId.Hand_IndexTip].Transform.position;
+        Vector3 indexTipDirection = leftBones[(int)OVRSkeleton.BoneId.Hand_IndexTip].Transform.forward;
+        Vector3 direction = new Vector3(0f, indexTipDirection.y / 2f, indexTipDirection.z);
+        Debug.Log($"Index Finger Direction {direction}");
+        lineRenderer.SetPosition(0, indexTipPosition);
+        lineRenderer.SetPosition(1, indexTipPosition + direction * 10f);
+        Vector3 movement = new Vector3(direction.x, direction.y, direction.z);
         movement = movement.normalized * 10f * Time.deltaTime;
 
         Vector3 newPosition = rb.position + movement;
