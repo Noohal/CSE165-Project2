@@ -15,6 +15,7 @@ public class AirRace : MonoBehaviour
     [SerializeField] int checkpointsCompleted = 0;
 
     bool finishedRace = false;
+    bool isPlaying = true;
 
     int elapsedTime;
     float previousTime;

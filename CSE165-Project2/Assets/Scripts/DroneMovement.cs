@@ -25,8 +25,12 @@ public class DroneMovement : MonoBehaviour
         Debug.Log($"ENTERED: {other.gameObject.tag}");
         if (other.gameObject.CompareTag("Checkpoint") && other.gameObject.Equals(currentTarget))
             OnCompleteCheckpoint?.Invoke();
-        else if (other.gameObject.CompareTag("Environment"))
-            rb.MovePosition(lastValidPosition);
+        
+        if (other.gameObject.CompareTag("Environment"))
+        {
+            Debug.Log("SENT TO THE GULAG");
+            rb.position = lastValidPosition;
+        }
     }
 
     private void OnTriggerExit(Collider other)

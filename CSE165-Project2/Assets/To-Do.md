@@ -17,4 +17,4 @@
 - [x] Add checkpoint goals (X/Y Checkpoints)
 - [x] Add timer
 - [x] Add UI for timer and progress
-- [ ] Respawn drone at most recent checkpoint if it crashes
+- [x] Respawn drone at most recent checkpoint if it crashes
