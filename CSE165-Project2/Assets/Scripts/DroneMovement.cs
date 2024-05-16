@@ -12,6 +12,15 @@ public class DroneMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log($"ENTERED: {other.gameObject.tag}");
+        if (other.gameObject.CompareTag("Environment"))
+        {
+            rb.velocity = Vector3.zero;
+        }
+    }
+
     public void SetPosition(Vector3 position)
     {
         gameObject.transform.position = position;
