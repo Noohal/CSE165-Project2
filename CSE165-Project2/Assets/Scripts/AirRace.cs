@@ -15,7 +15,6 @@ public class AirRace : MonoBehaviour
     [SerializeField] int checkpointsCompleted = 0;
 
     bool finishedRace = false;
-    bool isPlaying = true;
 
     int elapsedTime;
     float previousTime;
@@ -71,6 +70,5 @@ public class AirRace : MonoBehaviour
         }
         drone.SetLastValidPosition(checkpoints.coordinates[checkpointsCompleted]);
         drone.SetTarget(checkpoints.checkpoints[checkpointsCompleted + 1]);
-
     }
 }

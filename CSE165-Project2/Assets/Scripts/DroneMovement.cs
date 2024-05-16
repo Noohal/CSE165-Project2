@@ -6,7 +6,7 @@ using UnityEngine;
 public class DroneMovement : MonoBehaviour
 {
     public Rigidbody rb;
-    public bool isColliding = false;
+    public bool canMove = true;
 
     private GameObject currentTarget;
     private Vector3 lastValidPosition = Vector3.zero;
@@ -17,6 +17,7 @@ public class DroneMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        canMove = true;
         rb = GetComponent<Rigidbody>();
     }
 
@@ -30,6 +31,8 @@ public class DroneMovement : MonoBehaviour
         {
             Debug.Log("SENT TO THE GULAG");
             rb.position = lastValidPosition;
+            canMove = false;
+            StopDrone();
         }
     }
 
@@ -55,6 +58,7 @@ public class DroneMovement : MonoBehaviour
 
     public void Move(Vector3 direction, float speed)
     {
+        if (!canMove) return;
         Debug.Log($"Current Direction: {direction}, Current Speed: ${speed}");
         speed = Mathf.Clamp(speed, 0.1f, 35.0f);
         Vector3 movement = direction;
@@ -67,6 +71,12 @@ public class DroneMovement : MonoBehaviour
 
     public void StopDrone()
     {
-        //rb.velocity = Vector3.zero;
+        StartCoroutine(Wait3Seconds());
+    }
+
+    IEnumerator Wait3Seconds()
+    {
+        yield return new WaitForSeconds(3);
+        canMove = true;
     }
 }
