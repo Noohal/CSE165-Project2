@@ -6,25 +6,25 @@ public class DroneMovement : MonoBehaviour
 {
     public Rigidbody rb;
 
-    public bool isMoving = false;
-
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetPosition(Vector3 position)
     {
-        if  (isMoving)
-        {
-            
-        }
+        gameObject.transform.position = position;
     }
 
-    public void Move()
+    public void Move(Vector3 direction, float speed)
     {
-        isMoving = true;
+        Debug.Log($"Current Direction: {direction}");
+        Vector3 movement = direction;
+        movement = movement.normalized * speed * Time.deltaTime;
+
+        Vector3 newPosition = rb.position + movement;
+        rb.MovePosition(newPosition);
+        Debug.Log("Move!");
     }
 }

@@ -10,6 +10,8 @@ public class GenerateCheckpoints : MonoBehaviour
 
     public GameObject checkpointPrefab;
 
+    public DroneMovement drone;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,12 +21,8 @@ public class GenerateCheckpoints : MonoBehaviour
         }
 
         CreateCheckpoints();
-    }
+        drone.SetPosition(coordinates[0]);
 
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     void CreateCheckpoints()

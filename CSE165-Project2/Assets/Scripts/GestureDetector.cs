@@ -38,9 +38,10 @@ public class GestureDetector : MonoBehaviour
     public bool debugMode;
 
     // -- Drone Variables
-    public Rigidbody rb;
-    private List<Vector3> previousRightHandPos;
+    public DroneMovement drone;
     public Vector3 currentDirection;
+
+    private float currentSpeed = 1f;
 
     // Start is called before the first frame update
     void Start()
@@ -54,8 +55,6 @@ public class GestureDetector : MonoBehaviour
         lineRenderer.endWidth = 0.01f;
         lineRenderer.positionCount = 2;
         lineRenderer.material = new Material(Shader.Find("Sprites/Default")) { color = Color.red };
-
-        previousRightHandPos = new List<Vector3>();
     }
 
     // Update is called once per frame
@@ -75,8 +74,12 @@ public class GestureDetector : MonoBehaviour
         
         if (begin)
         {
+            Vector3 leftWrist = leftBones[(int)OVRSkeleton.BoneId.Hand_WristRoot].Transform.position;
             Vector3 rightHandTip = rightBones[(int)OVRSkeleton.BoneId.Hand_MiddleTip].Transform.position;
             Vector3 rightWrist = rightBones[(int)OVRSkeleton.BoneId.Hand_WristRoot].Transform.position;
+
+            currentSpeed = Vector3.Distance(leftWrist, rightWrist) * 50f;
+            Debug.Log($"Current Speed: {currentSpeed}");
 
             currentDirection = rightHandTip - rightWrist;
             lineRenderer.SetPosition(0, rightWrist);
@@ -111,7 +114,6 @@ public class GestureDetector : MonoBehaviour
             posData.Add(leftHandSkeleton.transform.InverseTransformPoint(bone.Transform.position));
             rotData.Add(Quaternion.Inverse(bone.Transform.rotation));
             scaData.Add(leftHandSkeleton.transform.InverseTransformVector(bone.Transform.localScale));
-            //data.Add(leftHandSkeleton.transform.InverseTransformPoint(bone.Transform.position));
         }
 
         g.posData = posData;
@@ -250,19 +252,6 @@ public class GestureDetector : MonoBehaviour
     // --- Gesture Actions
     public void MoveDrone()
     {
-        //    Vector3 indexTipPosition = leftBones[(int)OVRSkeleton.BoneId.Hand_IndexTip].Transform.position;
-        //    Vector3 indexTipDirection = leftBones[(int)OVRSkeleton.BoneId.Hand_IndexTip].Transform.forward;
-        //    Vector3 direction = new Vector3(0f, indexTipDirection.y / 2f, indexTipDirection.z);
-        //    Debug.Log($"Index Finger Direction {direction}");
-        //    lineRenderer.SetPosition(0, indexTipPosition);
-        //    lineRenderer.SetPosition(1, indexTipPosition + direction * 10f);
-        //    Vector3 movement = new Vector3(direction.x, direction.y, direction.z);
-        Debug.Log($"Current Direction: {currentDirection}");
-        Vector3 movement = currentDirection;
-        movement = movement.normalized * 10f * Time.deltaTime;
-
-        Vector3 newPosition = rb.position + movement;
-        rb.MovePosition(newPosition);
-        Debug.Log("Move!");
+        drone.Move(currentDirection, currentSpeed);
     }
 }
