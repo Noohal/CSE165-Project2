@@ -11,5 +11,9 @@
 - [x] Use tracking to move the drone
   - Pose like Superman to move forward?
   - Move arms away from center to turn left or right.
+- [ ] Add collision detection
 - [ ] Visual indicator to point where next checkpoint is
+- [ ] Add checkpoint goals (X/Y Checkpoints)
+- [ ] Add timer
+- [ ] Add UI for timer and progress
 - [ ] Respawn drone at most recent checkpoint if it crashes
