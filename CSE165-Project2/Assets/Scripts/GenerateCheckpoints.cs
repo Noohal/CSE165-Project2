@@ -13,7 +13,7 @@ public class GenerateCheckpoints : MonoBehaviour
     public DroneMovement drone;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         if (coordinateFile != null)
         {
@@ -21,8 +21,6 @@ public class GenerateCheckpoints : MonoBehaviour
         }
 
         CreateCheckpoints();
-        drone.SetPosition(coordinates[0]);
-
     }
 
     void CreateCheckpoints()
