@@ -11,7 +11,7 @@
 - [x] Use tracking to move the drone
   - Pose like Superman to move forward?
   - Move arms away from center to turn left or right.
-- [ ] Add collision detection
+- [x] Add collision detection
 - [ ] Visual indicator to point where next checkpoint is
 - [ ] Distance to next checkpoint
 - [ ] Add checkpoint goals (X/Y Checkpoints)

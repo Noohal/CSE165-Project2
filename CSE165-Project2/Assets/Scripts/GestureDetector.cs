@@ -237,6 +237,7 @@ public class GestureDetector : MonoBehaviour
                 MoveDrone();
                 break;
             default:
+                StopDrone();
                 break;
         }
 
@@ -253,5 +254,10 @@ public class GestureDetector : MonoBehaviour
     public void MoveDrone()
     {
         drone.Move(currentDirection, currentSpeed);
+    }
+
+    public void StopDrone()
+    {
+        drone.StopDrone();
     }
 }
