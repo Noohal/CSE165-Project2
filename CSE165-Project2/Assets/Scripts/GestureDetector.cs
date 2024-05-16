@@ -79,7 +79,6 @@ public class GestureDetector : MonoBehaviour
             Vector3 rightWrist = rightBones[(int)OVRSkeleton.BoneId.Hand_WristRoot].Transform.position;
 
             currentSpeed = Vector3.Distance(leftWrist, rightWrist) * 50f;
-            Debug.Log($"Current Speed: {currentSpeed}");
 
             currentDirection = rightHandTip - rightWrist;
             lineRenderer.SetPosition(0, rightWrist);

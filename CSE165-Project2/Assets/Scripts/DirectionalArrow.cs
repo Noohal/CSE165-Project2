@@ -24,7 +24,7 @@ public class DirectionalArrow : MonoBehaviour
     void Update()
     {
         Vector3 newPosition = tracking.position + new Vector3(tracking.forward.x, 0.0f, tracking.forward.z).normalized * offset;
-        newPosition.y -= 0.1f;
+        newPosition.y -= 0.25f;
         transform.position = newPosition;
     }
 

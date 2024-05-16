@@ -7,6 +7,7 @@ public class GenerateCheckpoints : MonoBehaviour
     public TextAsset coordinateFile;
 
     public List<Vector3> coordinates;
+    public List<GameObject> checkpoints;
 
     public GameObject checkpointPrefab;
 
@@ -27,7 +28,8 @@ public class GenerateCheckpoints : MonoBehaviour
     {
         foreach (var coord in coordinates)
         {
-            Instantiate(checkpointPrefab, coord, Quaternion.identity);
+            GameObject go = Instantiate(checkpointPrefab, coord, Quaternion.identity);
+            checkpoints.Add(go);
         }
     }
 }

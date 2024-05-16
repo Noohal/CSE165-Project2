@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class AirRace : MonoBehaviour
@@ -8,20 +9,49 @@ public class AirRace : MonoBehaviour
     public DroneMovement drone;
     public DirectionalArrow arrow;
 
-    int currentCheckpoint = 0;
+    public TextMeshProUGUI checkpointText;
+
+    [SerializeField] int checkpointsCompleted = 0;
+
+    bool finishedRace = false;
+
+    private void Awake()
+    {
+        drone.OnCompleteCheckpoint += CompleteCheckpoint;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        currentCheckpoint = 1;
+        checkpointsCompleted = 0;
+        finishedRace = false;
 
-        drone.SetPosition(checkpoints.coordinates[0]);
-        drone.SetLastValidPosition(checkpoints.coordinates[0]);
+        checkpointText.text = "Checkpoints: " + (checkpointsCompleted + 1) + "/" + checkpoints.coordinates.Count;
+        drone.SetPosition(checkpoints.coordinates[checkpointsCompleted]);
+        drone.SetLastValidPosition(checkpoints.coordinates[checkpointsCompleted]);
+        drone.SetTarget(checkpoints.checkpoints[checkpointsCompleted + 1]);
     }
 
     // Update is called once per frame
     void Update()
     {
-        arrow.LookAtCheckpoint(checkpoints.coordinates[currentCheckpoint]);
+        if (checkpointsCompleted < checkpoints.coordinates.Count - 1) 
+            arrow.LookAtCheckpoint(checkpoints.coordinates[checkpointsCompleted + 1]);
+    }
+
+    void CompleteCheckpoint()
+    {
+        if (finishedRace)
+            return;
+        checkpointsCompleted++;
+        checkpointText.text = "Checkpoints: " + (checkpointsCompleted + 1) + "/" + checkpoints.coordinates.Count;
+        if (checkpointsCompleted == checkpoints.checkpoints.Count - 1)
+        {
+            finishedRace = true;
+            return;
+        }
+        drone.SetLastValidPosition(checkpoints.coordinates[checkpointsCompleted]);
+        drone.SetTarget(checkpoints.checkpoints[checkpointsCompleted + 1]);
+
     }
 }
