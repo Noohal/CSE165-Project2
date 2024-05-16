@@ -10,10 +10,14 @@ public class AirRace : MonoBehaviour
     public DirectionalArrow arrow;
 
     public TextMeshProUGUI checkpointText;
+    public TextMeshProUGUI timeText;
 
     [SerializeField] int checkpointsCompleted = 0;
 
     bool finishedRace = false;
+
+    int elapsedTime;
+    float previousTime;
 
     private void Awake()
     {
@@ -23,6 +27,9 @@ public class AirRace : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        previousTime = 0.0f;
+        elapsedTime = 0;
+
         checkpointsCompleted = 0;
         finishedRace = false;
 
@@ -35,6 +42,17 @@ public class AirRace : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!finishedRace)
+        {
+            if ((Time.time - previousTime) >= 1.0f)
+            {
+                previousTime = Time.time;
+                elapsedTime++;
+
+                timeText.text = "Time: " + elapsedTime;
+            }
+        }
+
         if (checkpointsCompleted < checkpoints.coordinates.Count - 1) 
             arrow.LookAtCheckpoint(checkpoints.coordinates[checkpointsCompleted + 1]);
     }

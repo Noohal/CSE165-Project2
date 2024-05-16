@@ -15,6 +15,6 @@
 - [x] Visual indicator to point where next checkpoint is
 - [ ] Distance to next checkpoint
 - [x] Add checkpoint goals (X/Y Checkpoints)
-- [ ] Add timer
-- [ ] Add UI for timer and progress
+- [x] Add timer
+- [x] Add UI for timer and progress
 - [ ] Respawn drone at most recent checkpoint if it crashes
