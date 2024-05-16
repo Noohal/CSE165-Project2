@@ -27,8 +27,10 @@ public class GestureDetector : MonoBehaviour
 
     public LineRenderer lineRenderer;
 
-    private Gesture currentGesture;
-    private Gesture prevGesture;
+    private Gesture currentLeftGesture;
+    private Gesture currentRightGesture;
+    private Gesture previousLeftGesture;
+    private Gesture previousRightGesture;
     private bool begin = false;
     private List<OVRBone> leftBones;
     private List<OVRBone> rightBones;
@@ -38,18 +40,20 @@ public class GestureDetector : MonoBehaviour
     // -- Drone Variables
     public Rigidbody rb;
 
+    private List<Vector3> previousRightHandPos;
+
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(InitializeBones());
-        prevGesture = new Gesture();
-        currentGesture = new Gesture();
+        previousLeftGesture = new Gesture();
+        currentLeftGesture = new Gesture();
 
         lineRenderer = gameObject.AddComponent<LineRenderer>();
-        lineRenderer.startWidth = 0.5f;
+        lineRenderer.startWidth = 0.05f;
         lineRenderer.endWidth = 0.01f;
         lineRenderer.positionCount = 2;
-        lineRenderer.material = new Material(Shader.Find("Sprites/Default")) { color = Color.red }; // Set line color to red
+        lineRenderer.material = new Material(Shader.Find("Sprites/Default")) { color = Color.red };
     }
 
     // Update is called once per frame
@@ -60,7 +64,8 @@ public class GestureDetector : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
                 SaveLeft();
-            } else if (Input.GetKeyDown(KeyCode.RightArrow))
+            } 
+            else if (Input.GetKeyDown(KeyCode.RightArrow))
             {
                 SaveRight();
             }
@@ -94,8 +99,6 @@ public class GestureDetector : MonoBehaviour
 
         foreach (var bone in leftBones)
         {
-            GameObject go = new GameObject();
-            Transform newTransform = go.transform;
             posData.Add(leftHandSkeleton.transform.InverseTransformPoint(bone.Transform.position));
             rotData.Add(Quaternion.Inverse(bone.Transform.rotation));
             scaData.Add(leftHandSkeleton.transform.InverseTransformVector(bone.Transform.localScale));
@@ -119,8 +122,6 @@ public class GestureDetector : MonoBehaviour
 
         foreach (var bone in rightBones)
         {
-            GameObject go = new GameObject();
-            Transform newTransform = go.transform; 
             posData.Add(rightHandSkeleton.transform.InverseTransformPoint(bone.Transform.position));
             rotData.Add(Quaternion.Inverse(bone.Transform.rotation));
             scaData.Add(rightHandSkeleton.transform.InverseTransformVector(bone.Transform.localScale));
@@ -191,35 +192,63 @@ public class GestureDetector : MonoBehaviour
 
     void FindGesture()
     {
-        prevGesture = currentGesture;
+        previousLeftGesture = currentLeftGesture;
+        previousRightGesture = currentRightGesture;
         Gesture current = Recognize();
         bool hasRecognized = !current.Equals(new Gesture());
 
-        if (hasRecognized && !current.Equals(prevGesture))
+        if (hasRecognized)
         {
-            Debug.Log((current.hand == 0 ? "Left Hand" : "Right Hand") + " Gesture Found : " + current.name);
-            currentGesture = current;
+            if (current.hand == 0)
+            {
+                if (!current.Equals(previousLeftGesture))
+                {
+                    Debug.Log("Left Hand Gesture Found : " + current.name);
+                    currentLeftGesture = current;
+                }
+            } 
+            else
+            {
+                if (!current.Equals(previousRightGesture))
+                {
+                    Debug.Log("Right Hand Gesture Found : " + current.name);
+                    currentRightGesture = current;
+                }
+            }
         }
     }
 
     void PerformAction()
     {
-        if (currentGesture.name == "LPoint")
+        switch(currentLeftGesture.name)
         {
-            MoveDrone();
+            case "LPoint":
+                MoveDrone();
+                break;
+            default:
+                break;
+        }
+
+        switch (currentRightGesture.name)
+        {
+            case "RFist":
+                break;
+            default:
+                break;
         }
     }
 
     // --- Gesture Actions
     public void MoveDrone()
     {
-        Vector3 indexTipPosition = leftBones[(int)OVRSkeleton.BoneId.Hand_IndexTip].Transform.position;
-        Vector3 indexTipDirection = leftBones[(int)OVRSkeleton.BoneId.Hand_IndexTip].Transform.forward;
-        Vector3 direction = new Vector3(0f, indexTipDirection.y / 2f, indexTipDirection.z);
-        Debug.Log($"Index Finger Direction {direction}");
-        lineRenderer.SetPosition(0, indexTipPosition);
-        lineRenderer.SetPosition(1, indexTipPosition + direction * 10f);
-        Vector3 movement = new Vector3(direction.x, direction.y, direction.z);
+        //    Vector3 indexTipPosition = leftBones[(int)OVRSkeleton.BoneId.Hand_IndexTip].Transform.position;
+        //    Vector3 indexTipDirection = leftBones[(int)OVRSkeleton.BoneId.Hand_IndexTip].Transform.forward;
+        //    Vector3 direction = new Vector3(0f, indexTipDirection.y / 2f, indexTipDirection.z);
+        //    Debug.Log($"Index Finger Direction {direction}");
+        //    lineRenderer.SetPosition(0, indexTipPosition);
+        //    lineRenderer.SetPosition(1, indexTipPosition + direction * 10f);
+        //    Vector3 movement = new Vector3(direction.x, direction.y, direction.z);
+        Vector3 movement = Vector3.one;
         movement = movement.normalized * 10f * Time.deltaTime;
 
         Vector3 newPosition = rb.position + movement;
